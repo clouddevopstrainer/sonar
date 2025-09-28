@@ -6,7 +6,7 @@ provider "aws" {
 resource "aws_security_group" "dev_sg" {
   name        = "dev-sg"
   description = "Allow SSH, HTTP, NodePort"
-  
+
   ingress {
     description = "SSH"
     from_port   = 22
@@ -14,7 +14,7 @@ resource "aws_security_group" "dev_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
   ingress {
     description = "HTTP"
     from_port   = 8080
@@ -22,7 +22,7 @@ resource "aws_security_group" "dev_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
   ingress {
     description = "NodePort (K8s)"
     from_port   = 30080
@@ -50,21 +50,22 @@ resource "aws_instance" "app_server" {
               #!/bin/bash
               apt update -y
               apt upgrade -y
-              
+
               # Install Docker
               apt install -y docker.io
+              # Add ubuntu user to Docker group
               usermod -aG docker ubuntu
+
+              # Start Docker
               systemctl start docker
               systemctl enable docker
-              
-              # Optional: Install Minikube/K8s
+
+              # Install Minikube/Kubernetes tools
               curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
               install minikube-linux-amd64 /usr/local/bin/minikube
+
               curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
               install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-              
-              # Optional: Start Minikube
-              # minikube start --driver=none
               EOF
 
   tags = {
