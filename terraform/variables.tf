@@ -7,17 +7,17 @@ variable "region" {
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
-  default     = "t3.medium"
+  default     = "m7i-flex.large"
 }
 
 variable "key_name" {
   description = "Existing EC2 Key Pair name for SSH access"
   type        = string
-  default     = "your-key-name"
+  default     = "mini"
 }
 
 variable "ami_id" {
   description = "Ubuntu 22.04 AMI ID"
   type        = string
-  default     = "ami-xxxxxxxxxxxxxxx"
+  default     = "ami-0bbdd8c17ed981ef9"
 }
