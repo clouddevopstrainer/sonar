@@ -1,29 +1,19 @@
 package com.example.demo.model;
 
-public class User {
-    private String name;
-    private String email;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-    public User() {}
+class UserTest {
 
-    public User(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
+    @Test
+    void testUserModel() {
+        User user = new User();
+        user.setId(1L);
+        user.setName("John");
+        user.setEmail("john@example.com");
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        assertEquals(1L, user.getId());
+        assertEquals("John", user.getName());
+        assertEquals("john@example.com", user.getEmail());
     }
 }
