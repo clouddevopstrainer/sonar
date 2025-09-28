@@ -1,26 +1,18 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.User;
 import com.example.demo.service.HelloService;
-import org.springframework.web.bind.annotation.*;
+import org.junit.jupiter.api.Test;
 
-@RestController
-@RequestMapping("/api")
-public class HelloController {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    private final HelloService helloService;
+class HelloControllerTest {
 
-    public HelloController(HelloService helloService) {
-        this.helloService = helloService;
-    }
+    @Test
+    void testHelloEndpoint() {
+        HelloService service = new HelloService();
+        HelloController controller = new HelloController(service);
 
-    @GetMapping("/hello")
-    public String hello() {
-        return helloService.sayHello();
-    }
-
-    @PostMapping("/user")
-    public String createUser(@RequestBody User user) {
-        return helloService.greetUser(user);
+        String result = controller.sayHello("John");
+        assertEquals("Hello, John", result);
     }
 }
