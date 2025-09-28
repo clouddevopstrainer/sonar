@@ -53,6 +53,7 @@ resource "aws_instance" "app_server" {
               
               # Install Docker
               apt install -y docker.io
+              usermod -aG docker ubuntu
               systemctl start docker
               systemctl enable docker
               
