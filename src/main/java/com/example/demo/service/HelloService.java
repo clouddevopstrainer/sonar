@@ -1,16 +1,14 @@
 package com.example.demo.service;
 
-import com.example.demo.model.User;
-import org.springframework.stereotype.Service;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Service
-public class HelloService {
+class HelloServiceTest {
 
-    public String sayHello() {
-        return "Hello from Spring Boot CI/CD pipeline!";
-    }
-
-    public String greetUser(User user) {
-        return "Hello, " + user.getName() + "! Your email is " + user.getEmail();
+    @Test
+    void testSayHello() {
+        HelloService service = new HelloService();
+        String result = service.sayHello("John");
+        assertEquals("Hello, John", result);
     }
 }
