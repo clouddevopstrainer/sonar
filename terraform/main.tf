@@ -53,17 +53,17 @@ resource "aws_instance" "app_server" {
 
               # Install Docker
               apt install -y docker.io
-              # Add ubuntu user to Docker group
               usermod -aG docker ubuntu
 
               # Start Docker
               systemctl start docker
               systemctl enable docker
 
-              # Install Minikube/Kubernetes tools
+              # Install Minikube
               curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
               install minikube-linux-amd64 /usr/local/bin/minikube
 
+              # Install kubectl
               curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
               install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
               EOF
